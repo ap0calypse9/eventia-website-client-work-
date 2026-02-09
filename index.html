@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eventia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+font-family:'Inter',sans-serif;
+color:#3b2b1a;
+line-height:1.6;
+overflow-x:hidden;
+background:
+radial-gradient(circle at 20% 30%, rgba(255,215,120,0.35) 0, transparent 40%),
+radial-gradient(circle at 80% 20%, rgba(255,190,70,0.25) 0, transparent 40%),
+radial-gradient(circle at 50% 80%, rgba(230,160,40,0.25) 0, transparent 40%),
+repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 6px),
+linear-gradient(180deg,#fff3c4,#f6d57a,#e9b949);
+transition:.4s;
+}
+
+h1,h2,h3{font-family:'Playfair Display',serif}
+section{padding:90px 8%}
+.center{text-align:center}
+
+.btn{
+background:#c48a1c;
+color:white;
+padding:12px 26px;
+border-radius:30px;
+text-decoration:none;
+display:inline-block;
+margin-top:20px;
+transition:.3s
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(8px);
+position:sticky;
+top:0;
+z-index:10
+}
+
+nav a{margin-left:25px;text-decoration:none;color:#5a3d1e}
+
+#theme-toggle{
+margin-left:20px;
+padding:8px 14px;
+border-radius:20px;
+border:none;
+cursor:pointer;
+background:#c48a1c;
+color:white;
+}
+
+.fade-up{opacity:0;transform:translateY(40px);transition:all .8s ease}
+.fade-up.show{opacity:1;transform:translateY(0)}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:0 8%;
+position:relative;
+background:url('https://images.unsplash.com/photo-1511578314322-379afb476865') center/cover no-repeat;
+}
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+}
+.hero > div{
+position:relative;
+z-index:2;
+max-width:800px;
+color:white;
+}
+.hero h1{font-size:3.2rem;text-shadow:0 4px 18px rgba(0,0,0,0.6)}
+
+.grid{display:grid;gap:30px}
+.cards-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{
+background:rgba(255,255,255,0.75);
+padding:28px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:.3s
+}
+.card:hover{transform:translateY(-6px)}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.gallery-grid img{width:100%;border-radius:12px;transition:.4s}
+.gallery-grid img:hover{transform:scale(1.05)}
+
+.stats{background:rgba(255,255,255,0.25);border-radius:20px;padding:60px 20px}
+.stat-grid{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+.stat h3{font-size:2.5rem;color:#c48a1c}
+
+.faq{max-width:800px;margin:auto}
+.faq-item{background:rgba(255,255,255,0.75);margin-bottom:15px;border-radius:10px;padding:18px;cursor:pointer}
+.faq-item h4{display:flex;justify-content:space-between}
+.faq-item p{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.active p{max-height:200px;margin-top:10px}
+
+footer{background:linear-gradient(90deg,#b9770e,#d4a017);color:white;text-align:center;padding:50px 8%}
+.whatsapp-btn{display:inline-block;margin-top:20px;background:#25D366;color:white;padding:10px 22px;border-radius:30px;text-decoration:none}
+
+input,textarea{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #e0b85c}
+
+/* 🌙 DARK MODE */
+body.dark{
+background:linear-gradient(180deg,#1a1a1a,#111,#0c0c0c);
+color:#f5e6c8;
+}
+body.dark header{background:rgba(20,20,20,0.8)}
+body.dark .card,
+body.dark .stats,
+body.dark .faq-item{background:rgba(30,30,30,0.85);color:#f5e6c8}
+body.dark footer{background:linear-gradient(90deg,#3a2b10,#2b1d08)}
+body.dark input, body.dark textarea{background:#222;color:white;border:1px solid #555}
+body.dark .btn{background:#e0a800;color:#111}
+
+@media(max-width:900px){
+.hero{padding:120px 8% 80px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div style="display:flex;align-items:center;gap:10px">
+  <img src="images/logo.jpg" alt="Eventia Logo" style="height:45px">
+  <strong style="font-size:1.2rem">EVENTIA</strong>
+</div>
+
+<nav>
+<a href="#services">Services</a>
+<a href="#gallery">Gallery</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+<button id="theme-toggle">🌙</button>
+</header>
+
+<section class="hero fade-up">
+<div>
+<h1>We Design Events That Leave Lasting Impressions</h1>
+<p>Luxury weddings, corporate events, fests and unforgettable experiences.</p>
+<a class="btn" href="#contact">Get a Quote</a>
+</div>
+</section>
+
+<section id="about" class="fade-up">
+<h2 class="center">About Us</h2>
+<p class="center" style="max-width:700px;margin:10px auto 40px">We Plan. You Party.
+Experts in making moments magical—weddings, parties, pop-ups, launches & more.</p>
+<div class="grid cards-3">
+<div class="card"><h3>Our Story</h3><p>Born from a passion for design and flawless execution.</p></div>
+<div class="card"><h3>Our Mission</h3><p>To turn ideas into extraordinary experiences.</p></div>
+<div class="card"><h3>Our Vision</h3><p>Be a trusted event partner known for elegance.</p></div>
+</div>
+</section>
+
+<section id="services" class="fade-up">
+<h2 class="center">Our Services</h2>
+<div class="grid cards-3">
+<div class="card">Corporate Events</div>
+<div class="card">Luxury Weddings</div>
+<div class="card">College Fests</div>
+<div class="card">Brand Launches</div>
+<div class="card">Private Parties</div>
+<div class="card">Custom Event Solutions</div>
+</div>
+</section>
+
+<section id="gallery" class="fade-up">
+<h2 class="center">Gallery</h2>
+<div class="gallery-grid">
+<img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30">
+<img src="https://images.unsplash.com/photo-1529634896122-9d17d17c79e9">
+</div>
+</section>
+
+<section class="stats fade-up">
+<h2 class="center">Our Impact</h2>
+<div class="stat-grid">
+<div class="stat"><h3 class="counter" data-target="500">0</h3><p>Events</p></div>
+<div class="stat"><h3 class="counter" data-target="120">0</h3><p>Venues</p></div>
+<div class="stat"><h3 class="counter" data-target="300">0</h3><p>Clients</p></div>
+</div>
+</section>
+
+<section class="fade-up">
+<h2 class="center">FAQ</h2>
+<div class="faq">
+<div class="faq-item"><h4>How early should we book?<span>+</span></h4><p>At least 2–3 months in advance.</p></div>
+<div class="faq-item"><h4>Do you travel for events?<span>+</span></h4><p>Yes, across cities and destinations.</p></div>
+<div class="faq-item"><h4>How early should we book?<span>+</span></h4><p>At least 2–3 months in advance.</p></div>
+<div class="faq-item"><h4>How early should we book?<span>+</span></h4><p>At least 2–3 months in advance.</p></div>
+<div class="faq-item"><h4>How early should we book?<span>+</span></h4><p>At least 2–3 months in advance.</p></div>
+</div>
+</section>
+
+<section id="contact" class="fade-up center">
+<h2>Contact Us</h2>
+
+<form class="card" style="max-width:600px;margin:auto" id="contact-form">
+  <input id="name" placeholder="Name" required>
+  <input id="email" placeholder="Email" required>
+  <textarea id="details" placeholder="Event details" required></textarea>
+  <button type="submit" class="btn">Send Inquiry</button>
+</form>
+
+</section>
+
+<footer>
+  <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;text-align:left">
+    
+    <div>
+      <h3 style="margin-bottom:10px">Eventia</h3>
+      <p>Designing unforgettable events with creativity, elegance, and precision.</p>
+    </div>
+
+    <div>
+      <h4>Contact Details</h4>
+      <p><strong>Email:</strong> eventiaevents@gmail.com</p>
+      <p><strong>Phone:</strong> 8981696582</p>
+      <p><strong>Contact Person:</strong> Ratul Saha</p>
+    </div>
+
+    <div>
+      <h4>Office Address</h4>
+      <p>P 38 Kanungo Park,<br>Garia</p>
+    </div>
+
+  </div>
+
+  <hr style="margin:40px 0;border:none;border-top:1px solid rgba(255,255,255,0.3)">
+  <img src="images/logo.jpg" style="height:40px;margin-bottom:10px">
+
+
+  <p style="text-align:center">© Eventia. All rights reserved.</p>
+</footer>
+
+
+<script>
+const observer=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('show')),{threshold:.2});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+document.querySelectorAll('.faq-item').forEach(item=>item.addEventListener('click',()=>item.classList.toggle('active')));
+
+const counters=document.querySelectorAll('.counter');
+const statsObserver=new IntersectionObserver(entries=>{
+if(entries[0].isIntersecting){
+counters.forEach(counter=>{
+const target=+counter.dataset.target;let count=0;const step=target/100;
+const update=()=>{count+=step;if(count<target){counter.textContent=Math.floor(count);requestAnimationFrame(update);}else counter.textContent=target};update();
+});statsObserver.disconnect();}}, {threshold:.5});
+statsObserver.observe(document.querySelector('.stats'));
+
+const toggleBtn=document.getElementById('theme-toggle');
+toggleBtn.addEventListener('click',()=>{
+document.body.classList.toggle('dark');
+toggleBtn.textContent=document.body.classList.contains('dark')?"☀️":"🌙";
+});
+
+document.getElementById("contact-form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const details = document.getElementById("details").value;
+
+  const message = `New Event Inquiry:%0AName: ${name}%0AEmail: ${email}%0AEvent Details: ${details}`;
+
+  window.open(`https://wa.me/918981696582?text=${message}`, "_blank");
+});
+
+</script>
+
+</body>
+</html>
