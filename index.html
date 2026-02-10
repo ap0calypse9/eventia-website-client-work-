@@ -12,7 +12,7 @@ html{scroll-behavior:smooth}
 
 body{
 font-family:'Inter',sans-serif;
-color:#3b2b1a;
+color:#1a353b;
 line-height:1.6;
 overflow-x:hidden;
 background:
@@ -20,7 +20,7 @@ radial-gradient(circle at 20% 30%, rgba(255,215,120,0.35) 0, transparent 40%),
 radial-gradient(circle at 80% 20%, rgba(255,190,70,0.25) 0, transparent 40%),
 radial-gradient(circle at 50% 80%, rgba(230,160,40,0.25) 0, transparent 40%),
 repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 6px),
-linear-gradient(180deg,#fff3c4,#f6d57a,#e9b949);
+linear-gradient(180deg,#ecfeff,#a5f3fc,#5eead4);
 transition:.4s;
 }
 
@@ -29,7 +29,7 @@ section{padding:90px 8%}
 .center{text-align:center}
 
 .btn{
-background:#c48a1c;
+background:#3dc538;
 color:white;
 padding:12px 26px;
 border-radius:30px;
@@ -60,36 +60,18 @@ padding:8px 14px;
 border-radius:20px;
 border:none;
 cursor:pointer;
-background:#c48a1c;
+background:#9c5f33;
 color:white;
 }
 
 .fade-up{opacity:0;transform:translateY(40px);transition:all .8s ease}
 .fade-up.show{opacity:1;transform:translateY(0)}
 
-.hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:0 8%;
-position:relative;
-background:url('https://images.unsplash.com/photo-1511578314322-379afb476865') center/cover no-repeat;
-}
-.hero::before{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55));
-}
-.hero > div{
-position:relative;
-z-index:2;
-max-width:800px;
-color:white;
-}
-.hero h1{font-size:3.2rem;text-shadow:0 4px 18px rgba(0,0,0,0.6)}
+
+
+
+
+
 
 .grid{display:grid;gap:30px}
 .cards-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -101,6 +83,124 @@ box-shadow:0 10px 25px rgba(0,0,0,0.08);
 transition:.3s
 }
 .card:hover{transform:translateY(-6px)}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+/* IMAGE SLIDER */
+.hero-slider{
+position:absolute;
+inset:0;
+z-index:0;
+}
+
+.hero-slider span{
+position:absolute;
+inset:0;
+background-size:cover;
+background-position:center;
+opacity:0;
+animation:fadeSlide 18s infinite, zoom 18s infinite;
+}
+
+/* Images */
+.hero-slider span:nth-child(1){
+background-image:url('https://images.unsplash.com/photo-1745685962285-1e58456871ff?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+animation-delay:0s;
+}
+.hero-slider span:nth-child(2){
+background-image:url('https://plus.unsplash.com/premium_photo-1682092592909-8d26686e7f5e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+animation-delay:6s;
+}
+.hero-slider span:nth-child(3){
+background-image:url('https://images.unsplash.com/photo-1568530873454-e4103a0b3c71?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+animation-delay:12s;
+}
+
+/* Smooth Fade */
+@keyframes fadeSlide{
+0%{opacity:0}
+5%{opacity:1}
+30%{opacity:1}
+35%{opacity:0}
+100%{opacity:0}
+}
+
+/* Slow Zoom */
+@keyframes zoom{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
+}
+
+/* Overlay (lighter now) */
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+z-index:1;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:800px;
+color:white;
+padding:0 20px;
+}
+
+.hero h1{
+font-size:3.2rem;
+text-shadow:0 4px 18px rgba(0,0,0,0.6)
+}
+
+.services-slider{
+display:flex;
+gap:25px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding:40px 0;
+scroll-behavior:smooth;
+}
+
+.services-slider::-webkit-scrollbar{display:none;}
+
+.service-card{
+flex:0 0 280px;
+background:rgba(255,255,255,0.9);
+padding:35px 25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+scroll-snap-align:center;
+transition:.3s;
+}
+
+.service-card:hover{
+transform:translateY(-10px);
+box-shadow:0 18px 40px rgba(0,0,0,0.15);
+}
+
+.service-card img{
+width:90px;
+height:90px;
+object-fit:contain;
+margin-bottom:18px;
+transition:.3s;
+}
+
+.service-card:hover img{
+transform:scale(1.1);
+}
+
 
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
 .gallery-grid img{width:100%;border-radius:12px;transition:.4s}
@@ -116,7 +216,7 @@ transition:.3s
 .faq-item p{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .faq-item.active p{max-height:200px;margin-top:10px}
 
-footer{background:linear-gradient(90deg,#b9770e,#d4a017);color:white;text-align:center;padding:50px 8%}
+footer{background:linear-gradient(90deg,#78bfcc,#50c9c7);color:white;text-align:center;padding:50px 8%}
 .whatsapp-btn{display:inline-block;margin-top:20px;background:#25D366;color:white;padding:10px 22px;border-radius:30px;text-decoration:none}
 
 input,textarea{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #e0b85c}
@@ -157,13 +257,21 @@ body.dark .btn{background:#e0a800;color:#111}
 <button id="theme-toggle">🌙</button>
 </header>
 
-<section class="hero fade-up">
-<div>
-<h1>We Design Events That Leave Lasting Impressions</h1>
-<p>Luxury weddings, corporate events, fests and unforgettable experiences.</p>
-<a class="btn" href="#contact">Get a Quote</a>
-</div>
+<section class="hero">
+  <div class="hero-slider">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="hero-content">
+    <h1>We Design Events That Leave Lasting Impressions</h1>
+    <p>Luxury weddings, corporate events, fests and unforgettable experiences.</p>
+    <a class="btn" href="#">Get a Quote</a>
+  </div>
 </section>
+
+
 
 <section id="about" class="fade-up">
 <h2 class="center">About Us</h2>
@@ -178,15 +286,36 @@ Experts in making moments magical—weddings, parties, pop-ups, launches & more.
 
 <section id="services" class="fade-up">
 <h2 class="center">Our Services</h2>
-<div class="grid cards-3">
-<div class="card">Corporate Events</div>
-<div class="card">Luxury Weddings</div>
-<div class="card">College Fests</div>
-<div class="card">Brand Launches</div>
-<div class="card">Private Parties</div>
-<div class="card">Custom Event Solutions</div>
+
+<div class="services-slider">
+
+  <div class="service-card">
+    <img src="images/icons/photo.png" alt="Corporate Events">
+    <h3>Corporate Events</h3>
+        <h2 style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Pop-ups, Product Launches, Festivals & More)</h2>
+  </div>
+
+  <div class="service-card">
+    <img src="images/icons/wedding-arch.png" alt="Luxury Weddings">
+    <h3>Luxury Weddings</h3>
+        <h2 style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Pop-ups, Product Launches, Festivals & More)</h2>
+  </div>
+
+  <div class="service-card">
+    <img src="images/icons/cake.png" alt="Decorations">
+    <h3>Private Parties</h3>
+        <h2 style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Pop-ups, Product Launches, Festivals & More)</h2>
+  </div>
+
+  <div class="service-card">
+    <img src="images/icons/romantic-dinner.png" alt="Foods & Beverages">
+    <h3>Custom Event Solutions</h3>
+    <h2 style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Pop-ups, Product Launches, Festivals & More)</h2>
+  </div>
+
 </div>
 </section>
+
 
 <section id="gallery" class="fade-up">
 <h2 class="center">Gallery</h2>
@@ -293,7 +422,12 @@ document.getElementById("contact-form").addEventListener("submit", function(e){
   window.open(`https://wa.me/918981696582?text=${message}`, "_blank");
 });
 
+
+
+
 </script>
+
+
 
 </body>
 </html>
