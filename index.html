@@ -20,7 +20,7 @@ radial-gradient(circle at 20% 30%, rgba(255,215,120,0.35) 0, transparent 40%),
 radial-gradient(circle at 80% 20%, rgba(255,190,70,0.25) 0, transparent 40%),
 radial-gradient(circle at 50% 80%, rgba(230,160,40,0.25) 0, transparent 40%),
 repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 6px),
-linear-gradient(180deg,#ecfeff,#a5f3fc,#5eead4);
+linear-gradient(180deg,#ecfeff,#a5f3fc,#1ed2b7);
 transition:.4s;
 }
 
@@ -409,7 +409,7 @@ border:1px solid #374151;
 
 <div style="display:flex;align-items:center;gap:10px">
   <button id="menu-btn">☰</button>
-  <img src="images/logo.png" alt="Eventia Logo" style="height:45px">
+  <img src="images/logo.png" alt="Eventia Logo" style="height:100px">
   <strong style="font-size:1.2rem">EVENTIA</strong>
 </div>
 
@@ -594,7 +594,7 @@ we bring the same level of passion and professionalism to every occasion
   </div>
 
   <hr style="margin:40px 0;border:none;border-top:1px solid rgba(255,255,255,0.3)">
-  <img src="images/logo.png" style="height:40px;margin-bottom:10px">
+  <img src="images/logo.png" style="height:150px;margin-bottom:10px">
 
 
   <p style="text-align:center">© Eventia. All rights reserved.</p>
@@ -607,13 +607,35 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
 document.querySelectorAll('.faq-item').forEach(item=>item.addEventListener('click',()=>item.classList.toggle('active')));
 
-const counters=document.querySelectorAll('.counter');
-const statsObserver=new IntersectionObserver(entries=>{
-if(entries[0].isIntersecting){
-counters.forEach(counter=>{
-const target=+counter.dataset.target;let count=0;const step=target/100;
-const update=()=>{count+=step;if(count<target){counter.textContent=Math.floor(count);requestAnimationFrame(update);}else counter.textContent=target};update();
-});statsObserver.disconnect();}}, {threshold:.5});
+const counters = document.querySelectorAll('.counter');
+
+const statsObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+
+    counters.forEach(counter => {
+
+      const target = +counter.dataset.target;
+      let count = 0;
+      const step = target / 100;
+
+      const update = () => {
+        count += step;
+
+        if (count < target) {
+          counter.textContent = Math.floor(count) + "+";
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target + "+";
+        }
+      };
+
+      update();
+    });
+
+    statsObserver.disconnect();
+  }
+}, { threshold: 0.5 });
+
 statsObserver.observe(document.querySelector('.stats'));
 
 const toggleBtn=document.getElementById('theme-toggle');
