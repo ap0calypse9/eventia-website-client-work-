@@ -236,28 +236,34 @@ font-size:3.2rem;
 text-shadow:0 4px 18px rgba(0,0,0,0.6)
 }
 
-/* ===== AUTO SCROLL SERVICES ===== */
+/* SERVICES — manual scroll */
 .services-wrapper{
 overflow:hidden;
 position:relative;
 margin-top:40px;
 }
 
+/* user scrolls this */
 .services-track{
 display:flex;
 gap:25px;
-width:max-content;
-animation:scrollServices 40s linear infinite;
+overflow-x:auto;              /* enable scroll */
+scroll-behavior:smooth;
+padding-bottom:10px;
+}
+
+/* hide scrollbar (optional clean look) */
+.services-track::-webkit-scrollbar{
+display:none;
 }
 
 .service-card{
-flex:0 0 280px;
+flex:0 0 280px;               /* fixed width so scrolling works */
 background:rgba(255,255,255,0.9);
 padding:35px 25px;
 border-radius:20px;
 text-align:center;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:.3s;
 }
 
 .service-card img{
@@ -267,21 +273,34 @@ object-fit:contain;
 margin-bottom:18px;
 }
 
-.service-card:hover{
-transform:translateY(-10px);
-box-shadow:0 18px 40px rgba(0,0,0,0.15);
+
+
+
+
+/* Business Card Section */
+#business-card{
+padding-top:60px;
+padding-bottom:60px;
 }
 
-/* infinite scroll animation */
-@keyframes scrollServices{
-from{transform:translateX(0)}
-to{transform:translateX(-50%)}
+.card-display{
+display:flex;
+justify-content:center;
+margin-top:30px;
 }
 
-/* pause on hover */
-.services-wrapper:hover .services-track{
-animation-play-state:paused;
+.card-display img{
+width:500px;
+max-width:100%;
+height:auto;
+border-radius:8px;
 }
+
+
+
+
+
+
 
 
 
@@ -356,7 +375,7 @@ border:1px solid #374151;
 
 <div style="display:flex;align-items:center;gap:10px">
   <button id="menu-btn">☰</button>
-  <img src="images/logo.jpg" alt="Eventia Logo" style="height:45px">
+  <img src="images/logo.png" alt="Eventia Logo" style="height:45px">
   <strong style="font-size:1.2rem">EVENTIA</strong>
 </div>
 
@@ -433,31 +452,7 @@ we bring the same level of passion and professionalism to every occasion
       <p style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Tailored Event Experiences)</p>
     </div>
 
-    <!-- DUPLICATE SET FOR LOOP -->
-    <div class="service-card">
-      <img src="images/icons/photo.png">
-      <h3>Corporate Events</h3>
-      <p style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Pop-ups, Product Launches, Festivals & More)</p>
-    </div>
-
-    <div class="service-card">
-      <img src="images/icons/wedding-arch.png">
-      <h3>Luxury Weddings</h3>
-      <p style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Venue, Decor, Coordination)</p>
-    </div>
-
-    <div class="service-card">
-      <img src="images/icons/cake.png">
-      <h3>Private Parties</h3>
-      <p style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Birthdays, Anniversaries, Celebrations)</p>
-    </div>
-
-    <div class="service-card">
-      <img src="images/icons/romantic-dinner.png">
-      <h3>Custom Event Solutions</h3>
-      <p style="font-size:0.9rem;color:#c48a1c;margin-top:10px">(Tailored Event Experiences)</p>
-    </div>
-
+    
   </div>
 </div>
 </section>
@@ -493,6 +488,10 @@ we bring the same level of passion and professionalism to every occasion
 </div>
 </section>
 
+
+
+
+
 <section id="contact" class="fade-up center">
 <h2>Contact Us</h2>
 
@@ -505,6 +504,16 @@ we bring the same level of passion and professionalism to every occasion
 </form>
 
 </section>
+
+<!-- BUSINESS CARD SECTION -->
+<section id="business-card" class="fade-up">
+  <h2 class="center">Our Business Card</h2>
+
+  <div class="card-display">
+    <img src="images/business-card.jpg" alt="Eventia Business Card">
+  </div>
+</section>
+
 
 <footer>
   <div style="max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;text-align:left">
@@ -529,7 +538,7 @@ we bring the same level of passion and professionalism to every occasion
   </div>
 
   <hr style="margin:40px 0;border:none;border-top:1px solid rgba(255,255,255,0.3)">
-  <img src="images/logo.jpg" style="height:40px;margin-bottom:10px">
+  <img src="images/logo.png" style="height:40px;margin-bottom:10px">
 
 
   <p style="text-align:center">© Eventia. All rights reserved.</p>
